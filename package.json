@@ -1,0 +1,23 @@
+{
+	"name": "@jodu555/ezlogger",
+	"version": "1.0.0",
+	"description": "An Simple and easy logger to enhance my debugging and logging integrated with my command manager",
+	"main": "index.js",
+	"directories": {
+		"test": "tests"
+	},
+	"scripts": {
+		"test": "nodemon test/test.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Jodu555/EzLogger.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Jodu555/EzLogger/issues"
+	},
+	"homepage": "https://github.com/Jodu555/EzLogger#readme"
+}
