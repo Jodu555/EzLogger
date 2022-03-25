@@ -1,9 +1,27 @@
 const fs = require('fs');
 
 class Logger {
-    constructor(file = null) {
-        this.file = file;
-        this.level = -1;
+    /**
+     * @typedef {Object} LoggerOptions
+     * @property {Number|String} level=-1 The level as number or name
+     * @property {Boolean} autoFileHandling=true 
+     * @property {String} logFolder='logs/' 
+     * @property {String} filename=null When the autoFilehandling is activated the filename isnt necessary
+     */
+    /**
+     * @param  {LoggerOptions} options
+     */
+    constructor(options) {
+        const defaultOptions = {
+            level: -1,
+            autoFileHandling: true,
+            logFolder: path.join(process.cwd(), 'logs'),
+            filename: null,
+        }
+        this.options = { ...defaultOptions, ...options };
+
+        this.level = this.options.level;
+
         this.levels = {
             fatal: { value: 4, name: 'Fatal' },
             error: { value: 3, name: 'Error' },

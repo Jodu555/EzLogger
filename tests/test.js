@@ -3,7 +3,9 @@ const Logger = require('../src/Logger');
 const path = require('path');
 
 
-const logger = new Logger(path.join(process.cwd(), 'latest.log'));
+const logger = new Logger({
+
+});
 logger.setLevel(-1);
 
 logger.fatal('123: fatal');

@@ -7,7 +7,7 @@
 		"test": "tests"
 	},
 	"scripts": {
-		"test": "nodemon test/test.js"
+		"test": "nodemon tests/test.js"
 	},
 	"repository": {
 		"type": "git",
