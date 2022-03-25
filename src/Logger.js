@@ -31,6 +31,9 @@ class Logger {
         }
         this.logs = [];
     }
+    /**
+     * @param  {Number|String} level The level as number: 1, 2 or name: 'info', 'error'
+     */
     setLevel(level) {
         Number.isInteger(level) ?
             this.level = level :
@@ -43,11 +46,16 @@ class Logger {
         const line = `${new Date().toLocaleString()} - ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
         this.logs.push(line);
 
-        if (this.file != null)
-            fs.appendFileSync(this.file, line + '\n');
+        if (this.autoFileHandling == false) {
+            fs.appendFileSync(path.join(process.cwd(), this.options.logFolder, this.options.filename), line + '\n');
+        } else {
+
+        }
 
         if (this.level <= level)
             console.log(line);
+
+        return line;
     }
     fatal(...args) {
         this.deepLog(this.levels.fatal.value, ...args);

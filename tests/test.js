@@ -4,9 +4,9 @@ const path = require('path');
 
 
 const logger = new Logger({
-
+    level: -1,
+    autoFileHandling: true,
 });
-logger.setLevel(-1);
 
 logger.fatal('123: fatal');
 logger.error('123: error');
