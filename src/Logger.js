@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 class Logger {
     /**
@@ -30,6 +31,12 @@ class Logger {
             debug: { value: 0, name: 'Debug' }
         }
         this.logs = [];
+
+        // console.log(this.options);
+        try {
+            fs.mkdirSync(this.options.logFolder, { recursive: true });
+        } catch (error) {
+        }
     }
     /**
      * @param  {Number|String} level The level as number: 1, 2 or name: 'info', 'error'
@@ -46,16 +53,26 @@ class Logger {
         const line = `${new Date().toLocaleString()} - ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
         this.logs.push(line);
 
-        if (this.autoFileHandling == false) {
-            fs.appendFileSync(path.join(process.cwd(), this.options.logFolder, this.options.filename), line + '\n');
+        let file;
+        if (this.options.autoFileHandling == false) {
+            file = path.join(process.cwd(), this.options.logFolder, this.options.filename);
         } else {
-
+            //TODO: Here the automatic File handling
         }
+
+        this.writeToFile(line + '\n', file)
 
         if (this.level <= level)
             console.log(line);
 
         return line;
+    }
+    writeToFile(line, file) {
+        if (fs.existsSync(file))
+            fs.appendFileSync(file, line, 'utf-8');
+
+        fs.writeFileSync(file, line, 'utf-8')
+
     }
     fatal(...args) {
         this.deepLog(this.levels.fatal.value, ...args);
