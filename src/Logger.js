@@ -64,7 +64,7 @@ class Logger {
                 const date = this.getDateFromLines(lines);
                 if (date.toLocaleDateString() != new Date().toLocaleDateString()) { // Its the same day then the log before
                     console.log(date.toLocaleDateString(), '!=', new Date().toLocaleDateString());
-                    fs.renameSync(file, path.join(this.options.logFolder, `${new Date().toLocaleDateString()}.log`));
+                    fs.renameSync(file, path.join(this.options.logFolder, `${date.toLocaleDateString()}.log`));
                 }
             }
         }
