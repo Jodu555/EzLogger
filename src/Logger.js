@@ -55,24 +55,24 @@ class Logger {
 
         let file;
         if (this.options.autoFileHandling == false) {
-            file = path.join(process.cwd(), this.options.logFolder, this.options.filename);
+            file = path.join(this.options.logFolder, this.options.filename);
         } else {
             //TODO: Here the automatic File handling
         }
 
-        this.writeToFile(line + '\n', file)
+        this.writeToFile(file, line + '\n')
 
         if (this.level <= level)
             console.log(line);
 
         return line;
     }
-    writeToFile(line, file) {
+    writeToFile(file, line) {
+        console.log(fs.existsSync(file));
         if (fs.existsSync(file))
-            fs.appendFileSync(file, line, 'utf-8');
+            return fs.appendFileSync(file, line, 'utf-8');
 
-        fs.writeFileSync(file, line, 'utf-8')
-
+        fs.writeFileSync(file, line, 'utf-8');
     }
     fatal(...args) {
         this.deepLog(this.levels.fatal.value, ...args);
