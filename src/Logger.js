@@ -50,7 +50,7 @@ class Logger {
         return Object.values(this.levels).filter(l => l.value == num)[0].name;
     }
     deepLog(level, ...args) {
-        const line = `${new Date().toISOString()} - ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
+        const line = `${new Date().toISOString()} # ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
         this.logs.push(line);
 
         let file;
@@ -77,13 +77,17 @@ class Logger {
         return line;
     }
     getDateFromLines(lines) {
-        let line = lines.length - 1;
-        let date = new Date(lines[line].split('-')[0]);
-        while (date.getTime() != NaN) {
-            date = new Date(lines[lines.length - 1].split('-')[0]);
+        let line = lines.length;
+        let date = new Date('');
+        while (Number.isNaN(date.getTime())) {
+            try {
+                date = new Date(lines[line].split('#')[0].trim());
+            } catch (error) {
+                // console.log(error);
+            }
             line--;
+            if (line == -10) return;
         }
-        console.log(date);
         return date;
     }
     writeToFile(file, line) {
