@@ -5,7 +5,7 @@ const path = require('path');
 
 const logger = new Logger({
     level: -1,
-    autoFileHandling: false,
+    autoFileHandling: true,
     filename: 'latest.log'
 });
 
