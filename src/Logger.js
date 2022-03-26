@@ -59,10 +59,13 @@ class Logger {
         } else {
             //TODO: Here the automatic File handling
             file = path.join(this.options.logFolder, 'latest.log');
-            const lines = fs.readFileSync(file, 'utf-8').split('\n');
-            const date = new Date(Number(lines[lines.length - 2].split('-')[0]));
-            if (date.toLocaleDateString() !== new Date().toLocaleDateString()) { // Its the same day then the log before
-                fs.renameSync(file, path.join(this.options.logFolder, `${new Date().toLocaleDateString()}.log`));
+            if (fs.existsSync(file)) {
+                const lines = fs.readFileSync(file, 'utf-8').split('\n');
+                const date = this.getDateFromLines(lines);
+                if (date.toLocaleDateString() != new Date().toLocaleDateString()) { // Its the same day then the log before
+                    console.log(date.toLocaleDateString(), '!=', new Date().toLocaleDateString());
+                    fs.renameSync(file, path.join(this.options.logFolder, `${new Date().toLocaleDateString()}.log`));
+                }
             }
         }
 
@@ -72,6 +75,16 @@ class Logger {
             console.log(line);
 
         return line;
+    }
+    getDateFromLines(lines) {
+        let line = lines.length - 1;
+        let date = new Date(lines[line].split('-')[0]);
+        while (date.getTime() != NaN) {
+            date = new Date(lines[lines.length - 1].split('-')[0]);
+            line--;
+        }
+        console.log(date);
+        return date;
     }
     writeToFile(file, line) {
         if (fs.existsSync(file))
