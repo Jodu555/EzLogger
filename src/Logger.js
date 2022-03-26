@@ -50,7 +50,7 @@ class Logger {
         return Object.values(this.levels).filter(l => l.value == num)[0].name;
     }
     deepLog(level, ...args) {
-        const line = `${Date.now()} # ${new Date().toLocaleString()} - ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
+        const line = `${new Date().toISOString()} - ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
         this.logs.push(line);
 
         let file;
@@ -60,7 +60,7 @@ class Logger {
             //TODO: Here the automatic File handling
             file = path.join(this.options.logFolder, 'latest.log');
             const lines = fs.readFileSync(file, 'utf-8').split('\n');
-            const date = new Date(Number(lines[lines.length - 2].split('#')[0]));
+            const date = new Date(Number(lines[lines.length - 2].split('-')[0]));
             if (date.toLocaleDateString() !== new Date().toLocaleDateString()) { // Its the same day then the log before
                 fs.renameSync(file, path.join(this.options.logFolder, `${new Date().toLocaleDateString()}.log`));
             }
