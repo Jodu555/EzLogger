@@ -44,9 +44,12 @@ class Logger {
      * @param  {Number|String} level The level as number: 1, 2 or name: 'info', 'error'
      */
     setLevel(level) {
-        Number.isInteger(level) ?
-            this.level = level :
-            this.level = this.levels[level].value;
+        this.level = convertLevel(level);
+    }
+    convertLevel(smth) {
+        return Number.isInteger(smth) ?
+            smth :
+            this.levels[smth].value;
     }
     levelNumToName(num) {
         return Object.values(this.levels).filter(l => l.value == num)[0].name;
@@ -99,12 +102,21 @@ class Logger {
         fs.writeFileSync(file, line, 'utf-8');
     }
 
+    /**
+     * @typedef {Object} LoggerModuleOptions
+     * @property {String} name=Module #1
+     * @property {Number|String} level=-1 The level as number or name
+     */
+    /**
+     * @param  {LoggerModuleOptions} options
+     */
     createModule(options) {
         const defaultOptions = {
             name: 'Module #1',
             level: -1
         }
         options = { ...defaultOptions, ...options };
+        options.level = this.convertLevel(options.level);
         this.modules.set(options.name, new LoggerModule(this, options.name, options.level));
     }
 
