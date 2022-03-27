@@ -21,7 +21,9 @@ setTimeout(() => {
 }, 1000);
 
 logger.createModule({
-    name: 'Vm Creation',
+    name: 'VM-CREATION',
 })
+
+logger.get('VM-CREATION').info('12331212')
 
 console.log(logger.modules);

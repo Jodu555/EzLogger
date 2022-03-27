@@ -52,7 +52,7 @@ class Logger {
         return Object.values(this.levels).filter(l => l.value == num)[0].name;
     }
     deepLog(module, level, ...args) {
-        const line = `${new Date().toISOString()} # ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
+        const line = `${new Date().toISOString()} #${module == null ? '' : ` [${module.name}]`} ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
         this.logs.push(line);
 
         let file;
@@ -106,6 +106,10 @@ class Logger {
         }
         options = { ...defaultOptions, ...options };
         this.modules.set(options.name, new LoggerModule(this, options.name, options.level));
+    }
+
+    get(name) {
+        return this.modules.get(name) || null;
     }
 
     fatal(...args) {
