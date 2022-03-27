@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const LoggerModule = require('./LoggerModule');
 
 class Logger {
     /**
@@ -22,6 +23,7 @@ class Logger {
         this.options = { ...defaultOptions, ...options };
 
         this.level = this.options.level;
+        this.modules = new Map();
 
         this.levels = {
             fatal: { value: 4, name: 'Fatal' },
@@ -71,7 +73,7 @@ class Logger {
 
         this.writeToFile(file, line + '\n')
 
-        if (this.level <= level)
+        if ((module == null && this.level <= level) || (module != null && module.level <= level))
             console.log(line);
 
         return line;
@@ -96,6 +98,16 @@ class Logger {
 
         fs.writeFileSync(file, line, 'utf-8');
     }
+
+    createModule(options) {
+        const defaultOptions = {
+            name: 'Module #1',
+            level: -1
+        }
+        options = { ...defaultOptions, ...options };
+        this.modules.set(options.name, new LoggerModule(this, options.name, options.level));
+    }
+
     fatal(...args) {
         this.deepLog(null, this.levels.fatal.value, ...args);
     }

@@ -19,3 +19,9 @@ setTimeout(() => {
     logger.debug('123: lolololo');
 
 }, 1000);
+
+logger.createModule({
+    name: 'Vm Creation',
+})
+
+console.log(logger.modules);

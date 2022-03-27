@@ -1,7 +1,8 @@
 class LoggerModule {
-    constructor(head, name) {
+    constructor(head, name, level) {
         this.head = head;
         this.name = name;
+        this.level = level;
     }
     fatal(...args) {
         this.head.deepLog(this, this.levels.fatal.value, ...args);
@@ -19,3 +20,5 @@ class LoggerModule {
         this.head.deepLog(this, this.levels.debug.value, ...args);
     }
 }
+
+module.exports = LoggerModule;
