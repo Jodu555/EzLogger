@@ -49,7 +49,7 @@ class Logger {
     levelNumToName(num) {
         return Object.values(this.levels).filter(l => l.value == num)[0].name;
     }
-    deepLog(level, ...args) {
+    deepLog(module, level, ...args) {
         const line = `${new Date().toISOString()} # ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
         this.logs.push(line);
 
@@ -97,19 +97,19 @@ class Logger {
         fs.writeFileSync(file, line, 'utf-8');
     }
     fatal(...args) {
-        this.deepLog(this.levels.fatal.value, ...args);
+        this.deepLog(null, this.levels.fatal.value, ...args);
     }
     error(...args) {
-        this.deepLog(this.levels.error.value, ...args);
+        this.deepLog(null, this.levels.error.value, ...args);
     }
     warn(...args) {
-        this.deepLog(this.levels.warn.value, ...args);
+        this.deepLog(null, this.levels.warn.value, ...args);
     }
     info(...args) {
-        this.deepLog(this.levels.info.value, ...args);
+        this.deepLog(null, this.levels.info.value, ...args);
     }
     debug(...args) {
-        this.deepLog(this.levels.debug.value, ...args);
+        this.deepLog(null, this.levels.debug.value, ...args);
     }
 }
 
