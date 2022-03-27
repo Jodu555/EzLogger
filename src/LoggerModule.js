@@ -4,6 +4,9 @@ class LoggerModule {
         this.name = name;
         this.level = level;
     }
+    setLevel(level) {
+        this.level = this.head.convertLevel(level);
+    }
     fatal(...args) {
         this.head.deepLog(this, this.head.levels.fatal.value, ...args);
     }
