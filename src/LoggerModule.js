@@ -4,6 +4,9 @@ class LoggerModule {
         this.name = name;
         this.level = level;
     }
+    /**
+     * @param  {Number|String} level The level as number: 1, 2 or name: 'info', 'error'
+     */
     setLevel(level) {
         this.level = this.head.convertLevel(level);
     }

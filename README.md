@@ -4,6 +4,6 @@ An Simple and easy logger to enhance my debugging and logging integrated with my
 
 ## Todo
 
-- [ ] A Module System
+- [x] A Module System
 - [ ] An Implementation for my [commandManager](https://www.npmjs.com/package/@jodu555/commandmanager)
-- [ ] An Automatic file expand system: latest.log / 25.03.2022.log and so on
+- [x] An Automatic file expand system: latest.log / 25.03.2022.log and so on
