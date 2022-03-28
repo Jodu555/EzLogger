@@ -1,6 +1,6 @@
 {
 	"name": "@jodu555/ezlogger",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"description": "An Simple and easy logger to enhance my debugging and logging integrated with my command manager",
 	"main": "index.js",
 	"directories": {

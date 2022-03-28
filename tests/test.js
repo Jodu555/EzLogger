@@ -24,6 +24,6 @@ logger.createModule({
     name: 'VM-CREATION',
 })
 
-logger.get('VM-CREATION').info('12331212', { test: 'lol' })
+logger.get('VM-CREATION').info('12331212', { prop: [1, 2, 6], test: { name: 'lol' } })
 
 // console.log(logger.modules);
