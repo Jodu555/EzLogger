@@ -55,7 +55,8 @@ class Logger {
         return Object.values(this.levels).filter(l => l.value == num)[0].name;
     }
     deepLog(module, level, ...args) {
-        const line = `${new Date().toISOString()} #${module == null ? '' : ` [${module.name}]`} ${this.levelNumToName(level)} | ${[...args].join(' ')}`;
+        const linePrefix = `${new Date().toISOString()} #${module == null ? '' : ` [${module.name}]`}`
+        const line = `${linePrefix} ${this.levelNumToName(level)} | ${[...args].map(a => typeof a == 'object' ? JSON.stringify(a) : a).join(' ')}`;
         this.logs.push(line);
 
         let file;
