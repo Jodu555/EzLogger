@@ -120,6 +120,10 @@ class Logger {
         this.modules.set(options.name, new LoggerModule(this, options.name, options.level));
     }
 
+    /**
+     * @param {String} name The Logger Module name
+     * @returns {LoggerModule}
+     */
     get(name) {
         return this.modules.get(name) || null;
     }
