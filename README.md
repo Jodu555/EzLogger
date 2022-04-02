@@ -13,3 +13,4 @@ An Simple and easy logger to enhance my debugging and logging integrated with my
 ## Command Ideas
 
 Some Option to dump the logs to the console!
+An Option to activate some sort of auto dumping
