@@ -12,5 +12,6 @@ An Simple and easy logger to enhance my debugging and logging integrated with my
 
 ## Command Ideas
 
-Some Option to dump the logs to the console!
-An Option to activate some sort of auto dumping
+Some Command to dump the logs to the console!
+An Command to activate some sort of auto dumping
+An Command to change the level of the logger and the sub modules
