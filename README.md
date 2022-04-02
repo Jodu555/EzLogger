@@ -9,3 +9,7 @@ An Simple and easy logger to enhance my debugging and logging integrated with my
 - [x] An Automatic file expand system: latest.log / 25.03.2022.log and so on
 - [ ] Implement an terminal coloring based on the level
 - [ ] Write the documentation (with code samples)
+
+## Command Ideas
+
+Some Option to dump the logs to the console!
